@@ -1,0 +1,15 @@
+{
+  "name": "finance-tracker-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run start-backend & npm run start-frontend",
+    "start-backend": "nodemon finance-tracker-backend/src/server.js",
+    "start-frontend": "cd finance-tracker-frontend && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
