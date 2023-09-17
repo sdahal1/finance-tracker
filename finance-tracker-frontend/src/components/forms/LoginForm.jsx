@@ -1,15 +1,19 @@
 import { useState } from "react";
 import axios from 'axios'
-const BASE_URL = "http://localhost:5000"
+import {useHistory} from "react-router-dom";
+const BASE_URL = "http://localhost:5000";
 
 
 function LoginForm(props) {
+  const history = useHistory();
   const formDefault = {
     email: "",
     password: ""
   }
 
   const [formInfo, setFormInfo] = useState(formDefault)
+  const [formErrors, setFormErrors] = useState(formDefault)
+
 
   const changeHandler = (e)=>{
     setFormInfo({
@@ -22,11 +26,17 @@ function LoginForm(props) {
     e.preventDefault();
     async function login(){
       try{
-        const response = await axios.post(`${BASE_URL}/users/login`, formInfo)
+        const response = await axios.post(`${BASE_URL}/users/login`, {data:formInfo}, 
+        {withCredentials:true}
+        )
   
         console.log("response from api", response)
+        if(response.status === 200) {
+          history.push("/dashboard")
+        }
       }catch(error){
-        console.log("error", error.response.data)
+        console.log(error)
+        setFormErrors(error.response.data.error)
       }
     }
     login()
@@ -39,10 +49,12 @@ function LoginForm(props) {
       <div className="form-group">
         <label htmlFor="login_email">Email:</label>
         <input onChange={changeHandler} type="email" name="email" id="login_email" className="form-control" />
+        <p className="text-danger">{formErrors.email}</p>
       </div>
       <div className="form-group pb-2">
         <label htmlFor="login_password">Password:</label>
         <input onChange={changeHandler} type="password" name="password" id="login_password" className="form-control" />
+        <p className="text-danger">{formErrors.password}</p>
       </div>
       <input type="submit" value="Login" className="btn btn-success" />
     </form>

@@ -22,6 +22,12 @@ router
   .all(methodNotAllowed)
 
 router
+  .route("/getLoggedInUser")
+  .get(controller.getLoggedInUser)
+  .all(methodNotAllowed)
+
+  
+router
   .route("/:userId")
   .get(controller.read)
   .put(controller.update)

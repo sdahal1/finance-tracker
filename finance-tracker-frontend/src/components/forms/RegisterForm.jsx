@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:5000"
 
 function RegisterForm(props) {
   const history = useHistory();
-  console.log("history", history)
+  // console.log("history", history)
   const formDefault = {
     first_name: "",
     last_name: "",
@@ -60,7 +60,7 @@ function RegisterForm(props) {
       </div>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
-        <input onChange={changeHandler} type="email" name="email" id="email" className="form-control" />
+        <input onChange={changeHandler} type="text" name="email" id="email" className="form-control" />
         <p className="text-danger">{formErrors.email}</p>
       </div>
       <div className="form-group pb-2">

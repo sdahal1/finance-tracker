@@ -3,7 +3,7 @@
  */
 function errorHandler(error, request, response, next) {
   console.log("error handler hittin", error)
-  if(error.status === 400){
+  if(error.status === 400 || error.status === 401 || error.status === 404){
     return response.status(400).json({error})
   }else{
     const { status = 500, message = "Something went wrong!" } = error;
